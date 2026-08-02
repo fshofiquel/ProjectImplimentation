@@ -49,7 +49,7 @@ public class RestTodoAdapter extends RecyclerView.Adapter<RestTodoAdapter.RestTo
 
     @Override
     public int getItemCount() {
-        return items.size;
+        return items.size();
     }
 
     class RestTodoViewHolder extends RecyclerView.ViewHolder {

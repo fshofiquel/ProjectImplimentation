@@ -2,7 +2,6 @@ package com.example.projectimplimentation;
 
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -17,6 +16,7 @@ import com.example.projectimplimentation.network.TodoResponse;
 import com.example.projectimplimentation.network.TodoService;
 import com.example.projectimplimentation.network.TodoUploadRequest;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ExecutorService;
@@ -190,7 +190,7 @@ public class MainActivity extends AppCompatActivity {
                             getString(R.string.unknown_error)
                     );
                 }
-            } catch (Exception exception) {
+            } catch (IOException exception) {
                 statusText = getString(
                         R.string.web_error_format,
                         exception.getMessage() != null ? exception.getMessage() : getString(R.string.unknown_error)
@@ -224,7 +224,7 @@ public class MainActivity extends AppCompatActivity {
                             getString(R.string.unknown_error)
                     );
                 }
-            } catch (Exception exception) {
+            } catch (IOException exception) {
                 statusText = getString(
                         R.string.web_error_format,
                         exception.getMessage() != null ? exception.getMessage() : getString(R.string.unknown_error)
