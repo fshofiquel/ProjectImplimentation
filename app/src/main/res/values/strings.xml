@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">ProjectImplimentation</string>
+    <string name="title_database">1) Local Database Feature</string>
+    <string name="title_web_service">2) Web Service Feature</string>
+    <string name="note_hint">Type a short note</string>
+    <string name="save_note">Save Note to Database</string>
+    <string name="load_notes">Load Saved Notes</string>
+    <string name="no_notes_saved">No notes saved yet.</string>
+    <string name="empty_note_message">Please type a note before saving.</string>
+    <string name="fetch_web_data">Fetch Data from REST Service</string>
+    <string name="web_placeholder">Tap the button to fetch REST data.</string>
+    <string name="web_success_format">Todo #%1$d: %2$s (completed: %3$s)</string>
+    <string name="web_error_format">Failed to fetch data: %1$s</string>
+    <string name="unknown_error">unknown error</string>
+</resources>
