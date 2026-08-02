@@ -1,47 +1,36 @@
 # ProjectImplimentation
 
-## App idea (useful/novel)
-**Pocket Study Sync** helps students manage tasks offline while still interacting with online todo data.  
-It combines a local task list (for daily use without internet) with a REST-backed view (for pulling and pushing todo items).
+## Pocket Study Sync
+Pocket Study Sync is an Android app that combines a local todo list with a REST-backed todo view. It is designed for students who want to manage tasks offline while still being able to fetch and exchange items with online todo data.
 
-## Two required elements used
-1. **Database on device**: Room (SQLite) stores local todo items.
-2. **Reading data from a web service**: Retrofit loads todo data from JSONPlaceholder.
+## Core features
+- Create, view, update, and delete local todo items.
+- Mark local todos as completed or pending.
+- Fetch todo items from a remote REST API.
+- Upload local todo items to the REST-side list.
+- Transfer fetched REST items back into local storage.
 
 ## Internal implementation
-- **MainActivity**
-  - Handles menu switching between Local Todo and REST sections.
-  - Wires button actions for add, fetch, upload, and transfer flows.
-  - Uses a single background executor for DB and network work.
-- **Local persistence (`data/`)**
-  - `NoteEntity`: Room table model (`id`, `content`, `completed`).
-  - `NoteDao`: `insert`, `update`, `delete`, `getAll`.
-  - `AppDatabase`: singleton Room database with migration support.
+- **Language and platform**
+  - Java-based Android app.
+  - Minimum SDK 29, target SDK 34.
+- **Architecture**
+  - `MainActivity` manages UI actions, menu switching, and background execution.
+  - A single `ExecutorService` handles database and network operations off the main thread.
+- **Local data layer (`data/`)**
+  - `NoteEntity` defines the Room table model (`id`, `content`, `completed`).
+  - `NoteDao` provides `insert`, `update`, `delete`, and `getAll` operations.
+  - `AppDatabase` provides a singleton Room database instance with migration support.
 - **Network layer (`network/`)**
-  - `TodoService`: `GET /todos` and `POST /todos`.
-  - `TodoResponse`: REST response model.
-  - `TodoUploadRequest`: payload model for uploading local todos.
-- **UI behavior**
-  - Local list supports add, mark complete/incomplete, delete.
-  - REST list supports fetch and transfer of REST items back to local.
-  - Local items can be uploaded to REST and shown in REST-side list.
+  - `TodoService` defines REST endpoints for loading and uploading todos.
+  - `TodoResponse` maps incoming API response data.
+  - `TodoUploadRequest` defines the upload payload.
+- **UI layer**
+  - Two sections in the main screen: Local Todo and REST Side.
+  - RecyclerView adapters (`LocalTodoAdapter`, `RestTodoAdapter`) render and manage item interactions.
+  - Status text provides user feedback for loading, success, and error states.
 
-## What works
-- Local todo CRUD with Room-backed persistence.
-- Completion tracking for local items.
-- REST fetch and display of todo items.
-- Transfer local → REST and REST → local.
-- Basic error/status messaging for network operations.
-
-## What could not be completed here
-- Emulator-based screenshot capture in this sandbox environment.
-
-## Screenshot checklist (capture in emulator)
-Add multiple screenshots that show each feature:
-- Home screen with menu buttons visible.
-- Adding a local todo item.
-- Marking a local todo completed.
-- Removing a local todo item.
-- Fetching REST todo items.
-- Uploading a local todo to REST side.
-- Transferring a REST todo back to local list.
+## Current status
+- Local Room persistence and todo CRUD behavior are implemented.
+- REST fetch and upload flows are implemented.
+- Local/REST transfer behavior is implemented in both directions.
