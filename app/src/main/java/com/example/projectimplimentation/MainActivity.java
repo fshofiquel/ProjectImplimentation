@@ -45,6 +45,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        // Build long-lived app services once at startup.
         database = AppDatabase.getInstance(getApplicationContext());
         todoService = new Retrofit.Builder()
                 .baseUrl("https://jsonplaceholder.typicode.com/")
@@ -70,11 +71,13 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void setupLists() {
+        // Local list callbacks stay focused on local CRUD + upload.
         localTodoAdapter = new LocalTodoAdapter(
                 this::updateTodoState,
                 this::deleteTodo,
                 this::uploadTodoToRest
         );
+        // REST list callback performs a move from REST-side list to local DB.
         restTodoAdapter = new RestTodoAdapter(this::downloadTodoToLocal);
 
         RecyclerView todoRecyclerView = findViewById(R.id.todoRecyclerView);
@@ -141,6 +144,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void updateTodoState(NoteEntity todo, boolean completed) {
         ioExecutor.execute(() -> {
+            // Keep update simple: mutate selected item then persist.
             todo.setCompleted(completed);
             database.noteDao().update(todo);
             runOnUiThread(this::loadLocalTodos);
@@ -156,7 +160,9 @@ public class MainActivity extends AppCompatActivity {
 
     private void downloadTodoToLocal(TodoResponse todo) {
         ioExecutor.execute(() -> {
+            // Save to local first...
             database.noteDao().insert(new NoteEntity(todo.getTitle(), todo.isCompleted()));
+            // ...then remove from REST-side list so the item cannot be moved repeatedly.
             restTodos.removeIf(item -> item.getId() == todo.getId());
             runOnUiThread(() -> {
                 todoStatus.setText(getString(R.string.download_success));
@@ -194,6 +200,7 @@ public class MainActivity extends AppCompatActivity {
             String finalStatusText = statusText;
             runOnUiThread(() -> {
                 webResult.setText(finalStatusText);
+                // Always push a snapshot copy to avoid adapter-side mutation surprises.
                 restTodoAdapter.submitList(new ArrayList<>(restTodos));
                 showRestMenu();
             });

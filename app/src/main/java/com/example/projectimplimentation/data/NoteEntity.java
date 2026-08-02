@@ -5,6 +5,7 @@ import androidx.room.Entity;
 import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 
+// Room entity used by the local TODO list.
 @Entity(tableName = "notes")
 public class NoteEntity {
     @PrimaryKey(autoGenerate = true)

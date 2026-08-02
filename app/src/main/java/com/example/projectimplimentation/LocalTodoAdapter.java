@@ -43,6 +43,7 @@ public class LocalTodoAdapter extends RecyclerView.Adapter<LocalTodoAdapter.Loca
     }
 
     public void submitList(List<NoteEntity> todos) {
+        // Keep adapter state deterministic by replacing the full list.
         items.clear();
         items.addAll(todos);
         notifyDataSetChanged();

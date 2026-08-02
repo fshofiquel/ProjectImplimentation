@@ -28,6 +28,7 @@ public class RestTodoAdapter extends RecyclerView.Adapter<RestTodoAdapter.RestTo
     }
 
     public void submitList(List<TodoResponse> todos) {
+        // Replace list wholesale to mirror server/local transfer state exactly.
         items.clear();
         items.addAll(todos);
         notifyDataSetChanged();
