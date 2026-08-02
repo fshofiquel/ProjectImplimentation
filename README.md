@@ -13,7 +13,7 @@
   - Minimum SDK: **API 29 (Android 10)**
   - Build config: **Groovy DSL**
 - **Architecture (small, focused)**
-  - `MainActivity` coordinates UI actions and asynchronous work with `lifecycleScope` coroutines.
+  - `MainActivity` coordinates UI actions and asynchronous work with a background executor.
   - `data/` package contains Room persistence:
     - `NoteEntity` (table model)
     - `NoteDao` (`insert`, `getAll`)
