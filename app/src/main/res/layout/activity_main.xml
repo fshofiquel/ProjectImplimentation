@@ -62,7 +62,17 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:text="@string/web_placeholder" />
+            android:text="@string/web_placeholder"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
+
+        <TextView
+            android:id="@+id/todoListResult"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:padding="12dp"
+            android:text="@string/web_list_placeholder"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
 
     </LinearLayout>
 </ScrollView>

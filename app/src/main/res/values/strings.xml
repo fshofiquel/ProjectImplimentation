@@ -7,9 +7,12 @@
     <string name="load_notes">Load Saved Notes</string>
     <string name="no_notes_saved">No notes saved yet.</string>
     <string name="empty_note_message">Please type a note before saving.</string>
-    <string name="fetch_web_data">Fetch Data from REST Service</string>
-    <string name="web_placeholder">Tap the button to fetch REST data.</string>
-    <string name="web_success_format">Todo #%1$d: %2$s (completed: %3$s)</string>
+    <string name="fetch_web_data">Fetch Todo List from REST Service</string>
+    <string name="web_placeholder">Tap the button to fetch todo items from REST.</string>
+    <string name="web_loading">Loading todo list…</string>
+    <string name="web_success_format">Loaded %1$d todo items.</string>
     <string name="web_error_format">Failed to fetch data: %1$s</string>
+    <string name="web_list_placeholder">Todo items will appear here.</string>
+    <string name="web_list_error_placeholder">Could not load todo items.</string>
     <string name="unknown_error">unknown error</string>
 </resources>

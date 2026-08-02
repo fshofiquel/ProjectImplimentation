@@ -20,6 +20,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var noteInput: EditText
     private lateinit var databaseResult: TextView
     private lateinit var webResult: TextView
+    private lateinit var todoListResult: TextView
 
     private val database by lazy { AppDatabase.getInstance(applicationContext) }
     private val todoService by lazy {
@@ -37,6 +38,7 @@ class MainActivity : AppCompatActivity() {
         noteInput = findViewById(R.id.noteInput)
         databaseResult = findViewById(R.id.databaseResult)
         webResult = findViewById(R.id.webResult)
+        todoListResult = findViewById(R.id.todoListResult)
 
         findViewById<Button>(R.id.saveNoteButton).setOnClickListener {
             saveNote()
@@ -47,7 +49,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         findViewById<Button>(R.id.fetchTodoButton).setOnClickListener {
-            fetchTodo()
+            fetchTodos()
         }
 
         loadNotes()
@@ -84,17 +86,28 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun fetchTodo() {
+    private fun fetchTodos() {
+        webResult.text = getString(R.string.web_loading)
         lifecycleScope.launch(Dispatchers.IO) {
-            val resultText = try {
-                val todo = todoService.getSampleTodo()
-                getString(R.string.web_success_format, todo.id, todo.title, todo.completed)
+            val (statusText, listText) = try {
+                val todos = todoService.getTodos()
+                val formattedList = todos.joinToString(separator = "\n") {
+                    "${if (it.completed) "☑" else "☐"} ${it.title}"
+                }
+                Pair(getString(R.string.web_success_format, todos.size), formattedList)
             } catch (exception: Exception) {
-                getString(R.string.web_error_format, exception.message ?: getString(R.string.unknown_error))
+                Pair(
+                    getString(
+                        R.string.web_error_format,
+                        exception.message ?: getString(R.string.unknown_error)
+                    ),
+                    getString(R.string.web_list_error_placeholder)
+                )
             }
 
             withContext(Dispatchers.Main) {
-                webResult.text = resultText
+                webResult.text = statusText
+                todoListResult.text = listText
             }
         }
     }
