@@ -1,49 +1,47 @@
 # ProjectImplimentation
 
 ## App idea (useful/novel)
-**Pocket Study Sync** is a lightweight Android app for students to manage a proper local todo list and sync items back and forth with a REST todo view.
+**Pocket Study Sync** helps students manage tasks offline while still interacting with online todo data.  
+It combines a local task list (for daily use without internet) with a REST-backed view (for pulling and pushing todo items).
 
-## Two required mobile elements used
-1. **Database to store app data on the mobile device** (Room SQLite database)
-2. **Reading data from a web service** (Retrofit call to JSONPlaceholder REST API)
+## Two required elements used
+1. **Database on device**: Room (SQLite) stores local todo items.
+2. **Reading data from a web service**: Retrofit loads todo data from JSONPlaceholder.
 
-## Internal implementation description
-- **Platform/SDK**
-  - Android Studio Hedgehog compatibility
-  - Minimum SDK: **API 29 (Android 10)**
-  - Build config: **Groovy DSL**
-- **Architecture (small, focused)**
-  - `MainActivity` coordinates UI actions and asynchronous work with a background executor.
-  - `data/` package contains Room persistence:
-    - `NoteEntity` (table model)
-    - `NoteDao` (`insert`, `getAll`)
-    - `AppDatabase` (singleton Room DB)
-  - `network/` package contains REST integration:
-    - `TodoService` (Retrofit interface)
-    - `TodoResponse` (response model)
-- **UI flow**
-  - User works in a dedicated **Todo List** menu for add/remove/mark-complete actions.
-  - User opens a separate **REST Side** menu to load and view remote todos.
-  - User can transfer local todo items to the REST side and transfer REST items back to the local todo list.
+## Internal implementation
+- **MainActivity**
+  - Handles menu switching between Local Todo and REST sections.
+  - Wires button actions for add, fetch, upload, and transfer flows.
+  - Uses a single background executor for DB and network work.
+- **Local persistence (`data/`)**
+  - `NoteEntity`: Room table model (`id`, `content`, `completed`).
+  - `NoteDao`: `insert`, `update`, `delete`, `getAll`.
+  - `AppDatabase`: singleton Room database with migration support.
+- **Network layer (`network/`)**
+  - `TodoService`: `GET /todos` and `POST /todos`.
+  - `TodoResponse`: REST response model.
+  - `TodoUploadRequest`: payload model for uploading local todos.
+- **UI behavior**
+  - Local list supports add, mark complete/incomplete, delete.
+  - REST list supports fetch and transfer of REST items back to local.
+  - Local items can be uploaded to REST and shown in REST-side list.
 
-## What works / what could not be fully verified
-### Works (implemented in code)
-- Local todo persistence via Room on-device database.
-- Add/remove/complete local todo list actions.
-- REST fetch from a web service and display of fetched todo values.
-- Bidirectional transfer between local todo list and REST-side list.
-- Error handling text for network failures.
+## What works
+- Local todo CRUD with Room-backed persistence.
+- Completion tracking for local items.
+- REST fetch and display of todo items.
+- Transfer local → REST and REST → local.
+- Basic error/status messaging for network operations.
 
-### Could not be fully verified in this environment
-- Full emulator runtime verification and screenshot capture are not available in this sandboxed environment.
-- The screenshot section below includes required file names/locations to add emulator captures during final run.
+## What could not be completed here
+- Emulator-based screenshot capture in this sandbox environment.
 
-## Screenshots (multiple, showing each feature)
-Place emulator screenshots in `/home/runner/work/ProjectImplimentation/ProjectImplimentation/docs/screenshots/` with these names:
-- `01-home-screen.png` (initial UI)
-- `02-save-note.png` (saving to DB)
-- `03-load-notes.png` (loaded DB records)
-- `04-fetch-web-data.png` (REST data shown)
-
-## Code root for submission
-Use the full repository root (`/home/runner/work/ProjectImplimentation/ProjectImplimentation`) as the app code folder when creating the final zip submission.
+## Screenshot checklist (capture in emulator)
+Add multiple screenshots that show each feature:
+- Home screen with menu buttons visible.
+- Adding a local todo item.
+- Marking a local todo completed.
+- Removing a local todo item.
+- Fetching REST todo items.
+- Uploading a local todo to REST side.
+- Transferring a REST todo back to local list.
