@@ -151,8 +151,10 @@ class MainActivity : AppCompatActivity() {
             database.noteDao().insert(
                 NoteEntity(content = todo.title, completed = todo.completed)
             )
+            restTodos.removeAll { it.id == todo.id }
             withContext(Dispatchers.Main) {
                 todoStatus.text = getString(R.string.download_success)
+                restTodoAdapter.submitList(restTodos.toList())
                 showTodoMenu()
                 loadLocalTodos()
             }
