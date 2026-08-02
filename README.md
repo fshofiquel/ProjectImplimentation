@@ -1,7 +1,7 @@
 # ProjectImplimentation
 
 ## App idea (useful/novel)
-**Pocket Study Sync** is a lightweight Android app for students to quickly save short study notes locally and fetch a sample task from an online REST service to compare offline and online learning tasks in one place.
+**Pocket Study Sync** is a lightweight Android app for students to manage a proper local todo list and sync items back and forth with a REST todo view.
 
 ## Two required mobile elements used
 1. **Database to store app data on the mobile device** (Room SQLite database)
@@ -22,15 +22,16 @@
     - `TodoService` (Retrofit interface)
     - `TodoResponse` (response model)
 - **UI flow**
-  - User types a note and saves it to the local Room database.
-  - User can load and display all saved notes.
-  - User can fetch data from a REST endpoint (`https://jsonplaceholder.typicode.com/todos/1`) and view the result.
+  - User works in a dedicated **Todo List** menu for add/remove/mark-complete actions.
+  - User opens a separate **REST Side** menu to load and view remote todos.
+  - User can transfer local todo items to the REST side and transfer REST items back to the local todo list.
 
 ## What works / what could not be fully verified
 ### Works (implemented in code)
-- Local note persistence via Room on-device database.
-- Retrieval and display of stored notes.
-- REST fetch from a web service and display of fetched values.
+- Local todo persistence via Room on-device database.
+- Add/remove/complete local todo list actions.
+- REST fetch from a web service and display of fetched todo values.
+- Bidirectional transfer between local todo list and REST-side list.
 - Error handling text for network failures.
 
 ### Could not be fully verified in this environment
