@@ -1,0 +1,25 @@
+<resources>
+    <string name="app_name">ProjectImplimentation</string>
+    <string name="todo_menu">Todo List</string>
+    <string name="rest_menu">REST Side</string>
+    <string name="title_todo">Local Todo List</string>
+    <string name="title_web_service">REST Todo List</string>
+    <string name="todo_hint">Type a todo item</string>
+    <string name="add_todo">Add Todo</string>
+    <string name="delete_todo">Remove</string>
+    <string name="send_to_rest">Send to REST</string>
+    <string name="send_to_todo">Send to Todo</string>
+    <string name="no_todos_saved">No todo items yet.</string>
+    <string name="empty_todo_message">Please type a todo before adding.</string>
+    <string name="todo_count_format">%1$d pending of %2$d total</string>
+    <string name="fetch_web_data">View REST Todo Items</string>
+    <string name="web_placeholder">Load REST todos, then transfer any item back to your local todo list.</string>
+    <string name="web_loading">Loading todo list…</string>
+    <string name="web_success_format">Loaded %1$d todo items.</string>
+    <string name="upload_success_format">Uploaded &quot;%1$s&quot; to REST side.</string>
+    <string name="download_success">Moved item from REST side to local todo list.</string>
+    <string name="web_error_format">Failed to fetch data: %1$s</string>
+    <string name="completed_label">Completed</string>
+    <string name="pending_label">Pending</string>
+    <string name="unknown_error">unknown error</string>
+</resources>
