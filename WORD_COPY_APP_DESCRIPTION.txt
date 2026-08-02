@@ -1,0 +1,29 @@
+Pocket Study Sync - Project Description
+
+1) Internal implementation
+- Language/Platform: Java Android app (min SDK 29, target SDK 34).
+- Architecture: MainActivity coordinates UI and actions; background work runs through an ExecutorService.
+- Local data layer: Room database with NoteEntity, NoteDao, and AppDatabase singleton.
+- Network layer: REST communication through TodoService, TodoResponse, and TodoUploadRequest.
+- UI: Local Todo and REST Side sections, with RecyclerView adapters and status feedback text.
+
+2) What works
+- Local todo CRUD (create, read, update, delete).
+- Marking todos complete/pending.
+- Fetching todos from REST API.
+- Uploading local todos to REST side.
+- Transferring REST todos into local storage.
+
+3) What could not be completed yet
+- User authentication/accounts.
+- Multi-device conflict resolution for edits.
+- Advanced productivity features (sorting/filtering/reminders).
+- These were not finished due to time and project scope limits.
+
+4) App idea
+Pocket Study Sync is a useful student app that combines offline todo management with online todo exchange.  
+Students can keep studying and tracking tasks offline, then sync/fetch tasks when internet access is available.
+
+5) Two required elements used
+- Single-user app.
+- Real usefulness (practical study/task management support).

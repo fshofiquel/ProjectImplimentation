@@ -34,3 +34,25 @@ Pocket Study Sync is an Android app that combines a local todo list with a REST-
 - Local Room persistence and todo CRUD behavior are implemented.
 - REST fetch and upload flows are implemented.
 - Local/REST transfer behavior is implemented in both directions.
+- The app can be used today for managing and syncing study todos between local storage and a REST source.
+
+## What works
+- Creating, updating, deleting, and toggling completion on local todo items.
+- Viewing local todos in a RecyclerView backed by Room.
+- Fetching todo items from the REST endpoint.
+- Uploading local todos to the REST-side list.
+- Copying REST items into local storage.
+
+## What could not be completed yet
+- User accounts/authentication for personal cloud sync.
+- Conflict handling for simultaneous edits across devices.
+- Rich filtering, sorting, and deadline/reminder support.
+- These were not completed due to project scope/time limits.
+
+## App idea (useful/novel value)
+Pocket Study Sync is designed as a useful student productivity app that bridges offline-first task management with simple online todo exchange.  
+Its value is that students can continue working without internet, then fetch/upload tasks when connectivity returns.
+
+## Two required elements used
+1. **Single-user app**: The current app is built for one user on one device.
+2. **Real usefulness**: It solves a practical study-planning problem by combining offline storage and online task sync.
