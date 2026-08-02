@@ -64,7 +64,7 @@ public class LocalTodoAdapter extends RecyclerView.Adapter<LocalTodoAdapter.Loca
 
     @Override
     public int getItemCount() {
-        return items.size;
+        return items.size();
     }
 
     class LocalTodoViewHolder extends RecyclerView.ViewHolder {
